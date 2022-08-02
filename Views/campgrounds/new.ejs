@@ -1,14 +1,33 @@
 <% layout('layouts/boilerplate') %>
-    <h1>Add a new campground</h1>
-    <form action="/campgrounds" method="post">
-        <div>
-            <label for="title">Enter the campground title</label>
-            <input type="text" id="title" name="campground[title]">
-        </div>
-        <div>
-            <label for="location">Enter the campground location</label>
-            <input type="text" id="location" name="campground[location]">
-        </div>
-        <button>Add a new campground</button>
-    </form>
-    <a href="/campgrounds">Return to campgrounds</a>
+    <h1 class="text-center">Add a new campground</h1>
+    <div class="col-6 offset-3">
+        <form action="/campgrounds" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Enter the campground title</label>
+                <input type="text" class="form-control" id="title" name="campground[title]">
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Enter the campground location</label>
+                <input type="text" class="form-control" id="location" name="campground[location]">
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Enter the image URL</label>
+                <input type="text" class="form-control" id="image" name="campground[image]">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Enter the price</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="text" class="form-control" id="price" placeholder="0" name="campground[price]">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Enter the description</label>
+                <textarea type="text" class="form-control" name="campground[description]"></textarea>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Add a new campground</button>
+            </div>
+        </form>
+        <a href="/campgrounds">Return to campgrounds</a>
+    </div>
