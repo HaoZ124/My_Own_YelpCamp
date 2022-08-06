@@ -1,24 +1,24 @@
 <% layout('layouts/boilerplate') %>
     <h1 class="text-center">Edit the campground</h1>
     <div class="col-6 offset-3">
-        <form action="/campgrounds" method="post">
+        <form action="/campgrounds" method="post" novalidate class="needs-validation">
             <div class="mb-3">
                 <label for="title" class="form-label">Enter the campground title</label>
-                <input type="text" class="form-control" id="title" name="campground[title]" value="<%= campgrounds.title %> ">
+                <input type="text" class="form-control" id="title" name="campground[title]" value="<%= campgrounds.title %> " required>
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">Enter the campground location</label>
-                <input type="text" class="form-control" id="location" name="campground[location]" value="<%= campgrounds.location %> ">
+                <input type="text" class="form-control" id="location" name="campground[location]" value="<%= campgrounds.location %> " required>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Enter the image URL</label>
-                <input type="text" class="form-control" id="image" name="campground[image]" value="<%= campgrounds.image %> ">
+                <input type="text" class="form-control" id="image" name="campground[image]" value="<%= campgrounds.image %> " required>
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Enter the price</label>
                 <div class="input-group">
                     <span class="input-group-text">$</span>
-                    <input type="text" class="form-control" id="price" placeholder="0" name="campground[price]" value="<%= campgrounds.price %> ">
+                    <input type="text" class="form-control" id="price" placeholder="0" name="campground[price]" value="<%= campgrounds.price %> " required>
                 </div>
             </div>
             <div class="mb-3">
