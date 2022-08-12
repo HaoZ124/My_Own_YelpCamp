@@ -20,16 +20,30 @@
             </ul>
             <div class="card-body d-flex justify-content-center gap-4">
                 <button class="btn btn-info"><a href="/campgrounds/<%= campgrounds._id %>/edit" class="card-link text-decoration-none">Edit</a></button>
-                
                 <form action="/campgrounds/<%= campgrounds._id %>?_method=delete" method="post" class="card-link">
                    <button class="btn btn-danger">Delete</button> 
                 </form>
-                
             </div>
         </div>
-    
         <span><a href="/campgrounds">Return to campgrounds</a></span>
+        <h2>Please Leave a Review</h2>
+        <form action="/campgrounds/<%= campgrounds._id %>/reviews " method="post" class="mb-3 needs-validation" novalidate>
+            <div class="mb-3">
+                <label class="form-label" for="rate">Rating</label>
+                <input class="form-range" name="review[rate]" id="rate" type="range" min="1" max="5" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="comment">Review</label>
+                <textarea class="form-control" name="review[comment]" id="comment cols="30" rows="10" required></textarea>
+            </div>
+            <button class="btn btn-success">Submit</button>
+        </form>
+        <% for (let review of campgrounds.reviews) { %> 
+        <div class="mb-3">
+            <p><%= review.rating %></p>
+            <p><%= review.comment %></p>
+        </div>
+        <% } %> 
     </div>
-
 </div>
     

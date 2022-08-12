@@ -9,3 +9,10 @@ module.exports.errorSchema = joi.object({
         description: joi.string().required()
     })
 }).required()
+
+module.exports.reviewSchema = joi.object({
+    Review: joi.object({
+        comment: joi.string().required(),
+        rate: joi.number().required()
+    }).required()
+})
