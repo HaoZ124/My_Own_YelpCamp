@@ -1,4 +1,5 @@
-const joi = require('joi')
+const joi = require('joi');
+const {number} = require('joi');
 
 module.exports.errorSchema = joi.object({
     campground: joi.object({
@@ -7,12 +8,12 @@ module.exports.errorSchema = joi.object({
         image: joi.string().required(),
         location: joi.string().required(),
         description: joi.string().required()
-    })
-}).required()
+    }).required()
+});
 
 module.exports.reviewSchema = joi.object({
-    Review: joi.object({
+    review: joi.object({
         comment: joi.string().required(),
-        rate: joi.number().required()
+        rate: joi.number().required().min(1).max(5)
     }).required()
-})
+});
