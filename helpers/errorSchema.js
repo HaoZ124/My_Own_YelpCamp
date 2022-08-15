@@ -1,7 +1,7 @@
 const joi = require('joi');
 const {number} = require('joi');
 
-module.exports.errorSchema = joi.object({
+module.exports.campgroundSchema = joi.object({
     campground: joi.object({
         title: joi.string().required(),
         price: joi.number().required().min(0),
