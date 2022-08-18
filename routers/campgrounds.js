@@ -6,6 +6,7 @@ const { campgroundSchema } = require('../helpers/errorSchema');
 const methodOverride = require('method-override');
 const ExpressError = require('../helpers/ExpressError');
 const Campground = require('../Models/campground');
+const { isLoggedIn } = require('../middleware');
 
 app.use(methodOverride('_method'));
 
@@ -24,7 +25,7 @@ router.get('/', async(req, res) => {
     res.render('campgrounds/index', { campgrounds });
 })
 
-router.get('/new', async(req, res) => {
+router.get('/new', isLoggedIn, async(req, res) => {
     res.render('campgrounds/new');
 })
 
@@ -44,7 +45,7 @@ router.get('/:id', catchAsync(async(req, res) => {
     res.render('campgrounds/show', { campgrounds });
 }))
 
-router.get('/:id/edit', async(req, res) => {
+router.get('/:id/edit', isLoggedIn, async(req, res) => {
     const campgrounds = await Campground.findById(req.params.id)
     if (!campgrounds) {
         req.flash('error', 'Cannot find that campground!');
@@ -60,7 +61,7 @@ router.put('/:id', async(req, res) => {
     res.redirect(`/campgrounds/${campground._id}`);
 })
 
-router.delete('/:id', catchAsync(async(req, res) => {
+router.delete('/:id', isLoggedIn, catchAsync(async(req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndDelete(id);
     req.flash('success', 'Successfully deleted campground')

@@ -7,6 +7,7 @@ const Review = require('../Models/review');
 const {reviewSchema} = require('../helpers/errorSchema')
 const ExpressError = require('../helpers/ExpressError');
 const catchAsync = require('../helpers/catchAsync');
+const { isLoggedIn } = require('../middleware');
 
 app.use(methodOverride('_method'));
 
@@ -20,7 +21,7 @@ const validateReview = (req,res,next) => {
     }
 }
 
-router.post('/', validateReview, catchAsync(async (req, res) => {
+router.post('/', isLoggedIn, validateReview, catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id);
     const review = new Review(req.body.review);
     campground.reviews.push(review);
@@ -29,7 +30,7 @@ router.post('/', validateReview, catchAsync(async (req, res) => {
     res.redirect(`/campgrounds/${campground._id}`);
 }))
 
-router.delete('/:reviewId', catchAsync(async (req, res) => {
+router.delete('/:reviewId', isLoggedIn, catchAsync(async (req, res) => {
     const {id, reviewId} = req.params;
     const campground = await Campground.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
     await Review.findByIdAndDelete(reviewId);
