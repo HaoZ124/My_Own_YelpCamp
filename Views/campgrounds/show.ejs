@@ -60,6 +60,8 @@
                 </li>
                 <li class="list-group-item">$
                     <%= campgrounds.price %>/night</li>
+                <li class="list-group-item">
+                    Submitted by <%= campgrounds.author.username %></li>
             </ul>
             <div class="card-body d-flex justify-content-center gap-4">
                 <button class="btn btn-info"><a href="/campgrounds/<%= campgrounds._id %>/edit" class="card-link text-decoration-none">Edit</a></button>
@@ -94,7 +96,10 @@
             <% for (let review of campgrounds.reviews) { %> 
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5>Rating: <%= review.rate %></h5>
+                        <h5>Rating: <% for (let i=0; i<review.rate; i++) {%>
+                        <span>★ </span>
+                        <% } %> 
+                        </h5>
                         <p>Review: <%= review.comment %></p>
                         <form action="/campgrounds/<%= campgrounds._id %>/reviews/<%= review._id %>?_method=delete " method="post">
                             <button class="btn btn-danger">Delete</button>

@@ -7,19 +7,9 @@ const Review = require('../Models/review');
 const {reviewSchema} = require('../helpers/errorSchema')
 const ExpressError = require('../helpers/ExpressError');
 const catchAsync = require('../helpers/catchAsync');
-const { isLoggedIn } = require('../middleware');
+const { isLoggedIn, validateReview } = require('../middleware');
 
 app.use(methodOverride('_method'));
-
-const validateReview = (req,res,next) => {
-    const { error } = reviewSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join('');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-}
 
 router.post('/', isLoggedIn, validateReview, catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id);

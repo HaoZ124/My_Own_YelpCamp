@@ -36,11 +36,11 @@ router.post('/login', passport.authenticate('local', { failureFlash: true, failu
 })
 
 router.get('/logout', (req, res) => {
-    req.logout(function(err) {
+    req.logout((err) => {
         if (err) { return next(err); }
         res.redirect('/campgrounds');
+        req.flash('success', "Goodbye!");
       });
-    req.flash('success', "Goodbye!");
 })
 
 module.exports = router;
