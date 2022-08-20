@@ -4,15 +4,15 @@
         <% for (let campground of campgrounds) {%>
             <div class="card mb-3">
                 <a href="/campgrounds/<%= campground._id %>" class="text-decoration-none text-muted">
-                    <div class="row">
+                    <div class="d-flex flex-row mb-3">
                         <div class="col-md-4">
-                            <img src="<%= campground.image %> " class="card-img-top">
+                            <img src="<%= campground.image %> ">
                         </div>
-                        <div class="col-md-8">
-                            <h5 class="card-title">
+                        <div class="p-5">
+                            <h5 class="card-title mb-3">
                                 <%= campground.title%>
                             </h5>
-                            <p class="card-text">
+                            <p class="card-text mb-3">
                                 <%= campground.description%>
                             </p>
                             <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-primary">Edit</a>

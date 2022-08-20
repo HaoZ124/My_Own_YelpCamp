@@ -10,7 +10,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
-
 const userRoutes = require('./routers/users');
 const campgroundRoutes = require('./routers/campgrounds');
 const reviewRoutes = require('./routers/reviews');
@@ -58,6 +57,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+    console.log(req.user);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
