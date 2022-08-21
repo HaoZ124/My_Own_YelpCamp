@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../helpers/catchAsync');
 const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
+const multer = require('multer');
+const {storage} = require('../cloudinary/index');
+const upload = multer({ storage });
 
 const Campground = require('../models/campground');
 
@@ -15,13 +18,16 @@ router.get('/new', isLoggedIn, (req, res) => {
 })
 
 
-router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res, next) => {
-    const campgrounds = new Campground(req.body.campground);
-    campgrounds.author = req.user._id;
-    await campgrounds.save();
-    req.flash('success', 'Successfully made a new campground!');
-    res.redirect(`/campgrounds/${campgrounds._id}`)
-}))
+router.post('/', upload.array('image'), (req, res) => {
+    console.log(req.body, req.files);
+    res.send('It worked');
+    //catchAsync(async (req, res, next) => {
+    //const campgrounds = new Campground(req.body.campground);
+    //campgrounds.author = req.user._id;
+    //await campgrounds.save();
+    //req.flash('success', 'Successfully made a new campground!');
+    //res.redirect(`/campgrounds/${campgrounds._id}`)
+})
 
 router.get('/:id', catchAsync(async (req, res,) => {
     const campgrounds = await Campground.findById(req.params.id).populate({

@@ -1,3 +1,13 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+console.log(process.env.CLOUDINARY_CLOUD_NAME);
+console.log(process.env.CLOUDINARY_KEY);
+console.log(process.env.CLOUDINARY_SECRET);
+console.log(process.env.NODE_ENV);
+console.log(typeof process.env.NODE_ENV);
+console.log(process.env.NODE_ENV !== "production");
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -8,8 +18,8 @@ const ExpressError = require('./helpers/ExpressError');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const User = require('./models/user');
 
+const User = require('./models/user');
 const userRoutes = require('./routers/users');
 const campgroundRoutes = require('./routers/campgrounds');
 const reviewRoutes = require('./routers/reviews');
