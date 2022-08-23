@@ -1,12 +1,6 @@
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
-console.log(process.env.CLOUDINARY_CLOUD_NAME);
-console.log(process.env.CLOUDINARY_KEY);
-console.log(process.env.CLOUDINARY_SECRET);
-console.log(process.env.NODE_ENV);
-console.log(typeof process.env.NODE_ENV);
-console.log(process.env.NODE_ENV !== "production");
 
 const express = require('express');
 const path = require('path');
@@ -67,7 +61,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    console.log(req.user);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
