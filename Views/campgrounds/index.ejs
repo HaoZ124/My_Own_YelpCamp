@@ -2,13 +2,18 @@
     <h1>All Campgrounds</h1>
     <span><a href="/campgrounds/new">Add a new campground</a></span><br>
         <% for (let campground of campgrounds) {%>
-            <div class="card mb-3">
-                <a href="/campgrounds/<%= campground._id %>" class="text-decoration-none text-muted">
-                    <div class="d-flex flex-row mb-3">
-                        <div class="col-md-4">
-                            <img src="<%= campground.image %> ">
+            <a href="/campgrounds/<%= campground._id %>" class="text-decoration-none text-muted">
+                <div class="card mb-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <%if(campground.image.length) {%>
+                            <img class="img-fluid" style="height: 100%; width: 100%; object-fit: cover" src="<%=campground.image[0].url%>">
+                            <% }else {%>
+                            <img class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"
+                                src="https://res.cloudinary.com/dgvol2fmh/image/upload/v1661284480/Assets/scnoizbmkn8jjcdyi2im.jpg">
+                            <% } %>
                         </div>
-                        <div class="p-5">
+                        <div class="col-8">
                             <h5 class="card-title mb-3">
                                 <%= campground.title%>
                             </h5>
@@ -18,7 +23,7 @@
                             <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-primary">Edit</a>
                         </div>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
         <%}%>
     
